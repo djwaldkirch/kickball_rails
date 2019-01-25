@@ -1,0 +1,13 @@
+<h2>MY TEAMS</h2>
+<p>Here are your teams. Click Manage to create games and edit roster.</p>
+    <% @teams.each do |t| %>
+        <p>>> <%= t.name %> | <%= link_to "MANAGE", team_path(t) %></p>
+    <% end %>
+    <%= link_to "Create New Team", new_team_path %>
+<br></br>
+<h2>MY GAMES</h2>
+<p>Here are your recent games. Click to view or edit lineup.</p>
+    <% @games.each do |g| %>
+        <p>>> <%= g.date %> vs. <%= g.opponent %> | <%= link_to "LINEUP", game_path(g) %></p>
+    <% end %>
+    <%= link_to "All Games", games_path %> 

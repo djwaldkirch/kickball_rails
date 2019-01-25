@@ -1,0 +1,47 @@
+<%= form_for @player, url:{:controller=>'players', :action=>'update'}, html:{method:'put'} do |f| %>
+    
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    
+    <%= f.label :gender %>
+    <%= f.select :gender, ['male', 'female']%>
+    
+    <%= f.label :good_kicker %>
+    <%= f.check_box :good_kicker %>
+    
+    <%= f.label :p1 %>
+    <%= f.select :p1, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p2 %>
+    <%= f.select :p2, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p3 %>
+    <%= f.select :p3, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p4 %>
+    <%= f.select :p4, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p5 %>
+    <%= f.select :p5, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p6 %>
+    <%= f.select :p6, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p7 %>
+    <%= f.select :p7, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p8 %>
+    <%= f.select :p8, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p9 %>
+    <%= f.select :p9, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :p10 %>
+    <%= f.select :p10, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+    
+    
+    <%= f.submit "Update" %>
+<% end %>

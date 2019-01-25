@@ -1,0 +1,106 @@
+<p id="notice"><%= notice %></p>
+
+
+  <p>Opponent: <%= @game.opponent %></p>
+  <p>Date: <%= @game.date %></p>
+  
+  <p><%= link_to "Generate Lineup", :generate_lineup %></p>
+  <p>Make sure active players are set before generating lineup!</p>
+  
+
+
+<table class="table">
+  <tr>
+    <td></td>
+    <% index = 1 %>
+    <% @game.innings.each do |inning| %>
+      <th><%= index %></th>
+      <% index += 1 %>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Pitcher</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.p %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Catcher</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.c %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>First</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.first %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Third</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.third %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Left Rover</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.lr %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Right Rover</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.rr %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Left</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.l %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Left Center</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.lc %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Right Center</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.rc %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Right</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.r %></td>
+    <% end %>
+  </tr>
+  
+  <tr>
+    <td>Bench</td>
+    <% @game.innings.each do |inning| %>
+        <td><%= inning.bench %></td>
+    <% end %>
+  </tr>
+  
+  
+  
+</table>
+  
+
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

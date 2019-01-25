@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  p: MyString
+  c: MyString
+  first: MyString
+  third: MyString
+  lr: MyString
+  rr: MyString
+  l: MyString
+  lc: MyString
+  rc: MyString
+  r: MyString
+  bench: MyText
+
+two:
+  p: MyString
+  c: MyString
+  first: MyString
+  third: MyString
+  lr: MyString
+  rr: MyString
+  l: MyString
+  lc: MyString
+  rc: MyString
+  r: MyString
+  bench: MyText

@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <%= render 'games', team: @team %>
+  <%= link_to "Create New Game", :new_game %>
+</p>
+
+<p>
+  <%= render 'roster', team: @team %>
+  <%= link_to "Add Player", :new_player  %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>
