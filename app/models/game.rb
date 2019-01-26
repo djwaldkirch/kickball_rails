@@ -4,7 +4,7 @@ class Game < ApplicationRecord
     belongs_to :team
     
     def generate_lineup(t)
-      clear_all
+       clear_all
        roster = get_working_roster(t)
        roster = create_bench_order(roster)
        set_defense(self, roster)

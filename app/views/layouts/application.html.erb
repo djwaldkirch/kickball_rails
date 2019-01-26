@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="main-bg">
+  <body class="bg">
     <%= render 'layouts/navbar' %>
     
     <div class="container container-color">
@@ -22,8 +22,9 @@
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
     <br></br>
-    
+      <div class="bg-block">
       <%= yield %>
+      </div>
     </div>
   </body>
 </html>
