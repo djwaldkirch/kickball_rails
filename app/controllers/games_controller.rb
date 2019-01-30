@@ -17,7 +17,8 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @team = Team.find(params[:id])
-    @game = Game.new
+    @game = @team.games.build
+    @game.no_of_innings = nil
   end
 
   # GET /games/1/edit
@@ -29,16 +30,17 @@ class GamesController < ApplicationController
   def create
     @team = Team.find(params[:id])
     @game = @team.games.build(game_params)
-    @game.user = @team.user
-    
-    (@game.no_of_innings).times do
-      @inning = @game.innings.build
-      @inning.save
-    end
-    
+    @game.user = current_user
+
     
     respond_to do |format|
       if @game.save
+        
+        (@game.no_of_innings).times do
+          @game.innings.build
+          @game.save
+        end
+        
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
@@ -76,7 +78,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @team = @game.team
     @game.generate_lineup(@team)
-    
+    @game.save!
     render :show
   end
 

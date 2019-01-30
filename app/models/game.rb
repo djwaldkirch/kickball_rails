@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-    has_many :innings
+    has_many :innings, inverse_of: :game, dependent: :destroy
     belongs_to :user
     belongs_to :team
     

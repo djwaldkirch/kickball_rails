@@ -1,13 +1,17 @@
 <%= form_for @player, url:{:controller=>'players', :action=>'create'}, html:{method:'post'} do |f| %>
     
+    <p>
     <%= f.label :name %>
     <%= f.text_field :name %>
+    </p>
     
     <%= f.label :gender %>
     <%= f.select :gender, ['male', 'female']%>
+    <br>
     
     <%= f.label :good_kicker %>
     <%= f.check_box :good_kicker %>
+    <br>
     
     <%= f.label :p1 %>
     <%= f.select :p1, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
