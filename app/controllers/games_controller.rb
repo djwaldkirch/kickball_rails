@@ -36,11 +36,6 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.save
         
-        (@game.no_of_innings).times do
-          @game.innings.build
-          @game.save
-        end
-        
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
@@ -78,9 +73,11 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @team = @game.team
     @game.generate_lineup(@team)
-    @game.save!
+    
     render :show
+    @game.save
   end
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -91,10 +88,6 @@ class GamesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
       params.require(:game).permit(:no_of_innings, :opponent, :date)
-    end
-    
-    def inning_params
-      params.require(:inning).permit(:p, :c, :first, :third, :lr, :rr, :l, :lc, :rc, :r, :bench)
     end
     
 end

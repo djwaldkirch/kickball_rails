@@ -13,22 +13,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :opponent %>
-    <%= f.text_field :opponent %>
+    <%= f.text_field :opponent, class:"form-control" %>
   </div>
   
-  <div class="field">
+  <div class="form-group">
     <%= f.label :no_of_innings %>
-    <%= f.select :no_of_innings, [5, 6, 7, 8, 9]%>
+    <%= f.select :no_of_innings, [5,6,7,8,9], {}, {class: "form-control"} %>
   </div>
   
-  <div class="field">
+  <div class="form-group">
     <%= f.label :date %>
-    <%= f.date_field :date %>
+    <%= f.date_field :date, class:"form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Game", class:"btn btn-danger" %>
   </div>
+  <br>
 <% end %>

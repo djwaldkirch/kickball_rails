@@ -1,3 +1,3 @@
 class Inning < ApplicationRecord
-    belongs_to :game
+    belongs_to :game, :autosave => true
 end

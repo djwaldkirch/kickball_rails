@@ -1,51 +1,86 @@
 <%= form_for @player, url:{:controller=>'players', :action=>'create'}, html:{method:'post'} do |f| %>
     
-    <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-    </p>
+    <% menu = [['Pitcher','p'],['Catcher','c'],['First','first'],['Third','third'],['Left Rover','lr'],['Right Rover','rr'],['Left','l'],['Left Center','lc'],['Right Center','r'],['Right','R']] %>
     
-    <%= f.label :gender %>
-    <%= f.select :gender, ['male', 'female']%>
-    <br>
+    <div class="form-group">
+        <%= f.label :name, class:"control label" %>
+        <%= f.text_field :name, class:"form-control" %>
+    </div>
     
-    <%= f.label :good_kicker %>
-    <%= f.check_box :good_kicker %>
-    <br>
+    <div class="form-group">
+        <%= f.label :gender, class:"col-form-label" %>
+        <%= f.select :gender, [['Male', 'male'], ['Female', 'female']], {}, {class: "form-control"} %>
+    </div>
     
-    <%= f.label :p1 %>
-    <%= f.select :p1, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    <div class="form-group">
+        <%= f.label :good_kicker %>
+        <%= f.check_box :good_kicker %>
+    </div>
     
-    <%= f.label :p2 %>
-    <%= f.select :p2, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    <p>Position Preferences</p>
+    <div class="form-group">
+        <%= f.label :p1, "1." %>
+        <%= f.select :p1, menu, {}, {class: "form-control"} %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label :p2, "2." %>
+    <%= f.select :p2, menu, {}, {class: "form-control"} %>
+    </div>
+
+
+    <div class="form-group">
+    <%= f.label :p3, "3." %>
+    <%= f.select :p3,menu, {}, {class: "form-control"} %>
+    </div>
     
-    <%= f.label :p3 %>
-    <%= f.select :p3, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
     
-    <%= f.label :p4 %>
-    <%= f.select :p4, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    <div class="form-group">
+    <%= f.label :p4, "4." %>
+    <%= f.select :p4, menu, {}, {class: "form-control"} %>
+    </div>
     
-    <%= f.label :p5 %>
-    <%= f.select :p5, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
     
-    <%= f.label :p6 %>
-    <%= f.select :p6, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    <div class="form-group">
+    <%= f.label :p5, "5." %>
+    <%= f.select :p5, menu, {}, {class: "form-control"} %>
+    </div>
     
-    <%= f.label :p7 %>
-    <%= f.select :p7, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
     
-    <%= f.label :p8 %>
-    <%= f.select :p8, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    <div class="form-group">
+    <%= f.label :p6, "6." %>
+    <%= f.select :p6, menu, {}, {class: "form-control"} %>
+    </div>
     
-    <%= f.label :p9 %>
-    <%= f.select :p9, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
     
-    <%= f.label :p10 %>
-    <%= f.select :p10, ['p', 'c', 'first', 'third', 'lr', 'rr', 'l', 'lc', 'rc', 'r']%>
+    <div class="form-group">
+    <%= f.label :p7, "7." %>
+    <%= f.select :p7, menu, {}, {class: "form-control"} %>
+    </div>
     
+    
+    <div class="form-group">
+    <%= f.label :p8, "8." %>
+    <%= f.select :p8, menu, {}, {class: "form-control"} %>
+    </div>
+    
+    
+    <div class="form-group">
+    <%= f.label :p9, "9." %>
+    <%= f.select :p9, menu, {}, {class: "form-control"} %>
+    </div>
+    
+    
+    <div class="form-group">
+    <%= f.label :p10, "10." %>
+    <%= f.select :p10, menu, {}, {class: "form-control"} %>
+    </div>
+    
+    <div class="form-group">
     <%= f.label :active %>
     <%= f.check_box :active %>
+    </div>
     
     
-    <%= f.submit "Create" %>
+    <%= f.submit "Update", class:"btn btn-default" %>
 <% end %>

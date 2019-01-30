@@ -2,12 +2,21 @@ class Game < ApplicationRecord
     has_many :innings, inverse_of: :game, dependent: :destroy
     belongs_to :user
     belongs_to :team
+
     
     def generate_lineup(t)
-       clear_all
+       self.innings = []
+       create_innings
        roster = get_working_roster(t)
        roster = create_bench_order(roster)
        set_defense(self, roster)
+       self.save
+    end
+    
+    def create_innings
+        (self.no_of_innings).times do
+          self.innings << Inning.new
+        end
     end
     
     #get working roster of people
@@ -100,9 +109,11 @@ class Game < ApplicationRecord
            
            until index > 9 do 
              if free?(inning.p) && player_prefs[index] == 'p'
+              inning.p_will_change!
               inning.p = plr.name
               break
              elsif free?(inning.c) && player_prefs[index] == 'c'
+              inning.c_will_change!
               inning.c = plr.name
               break
              elsif free?(inning.first) && player_prefs[index] == 'first'

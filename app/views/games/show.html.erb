@@ -4,7 +4,9 @@
   <p>Opponent: <%= @game.opponent %></p>
   <p>Date: <%= @game.date %></p>
   
-  <p><%= link_to "Generate Lineup", :generate_lineup %></p>
+  <p><%= button_to "Generate Lineup", generate_button_path, class:"btn btn-danger", method: :post %>
+  
+  <!--#link_to "Generate Lineup", :generate_lineup, :method=> :post</p>-->
   <p>Make sure active players are set before generating lineup!</p>
   
 
