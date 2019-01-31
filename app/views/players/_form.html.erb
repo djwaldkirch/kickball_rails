@@ -1,6 +1,6 @@
 <%= form_for @player, url:{:controller=>'players', :action=>'create'}, html:{method:'post'} do |f| %>
     
-    <% menu = [['Pitcher','p'],['Catcher','c'],['First','first'],['Third','third'],['Left Rover','lr'],['Right Rover','rr'],['Left','l'],['Left Center','lc'],['Right Center','r'],['Right','R']] %>
+    <% menu = [['Pitcher','p'],['Catcher','c'],['First','first'],['Third','third'],['Left Rover','lr'],['Right Rover','rr'],['Left','l'],['Left Center','lc'],['Right Center','rc'],['Right','r']] %>
     
     <div class="form-group">
         <%= f.label :name, class:"control label" %>
