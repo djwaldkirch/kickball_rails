@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class:"form-control" %>
   </div>
 
   <!-- the form for the players is actually invisible because we don't want to add them here -->
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit, class:"btn btn-danger" %>
   </div>
 <% end %>
