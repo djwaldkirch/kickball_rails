@@ -1,6 +1,7 @@
 class DashboardsController < ApplicationController
     def index
-        @teams = Team.all
-        @games = Game.all
+        @user = current_user
+        @teams = @user.teams
+        @games = @user.games
     end
 end
