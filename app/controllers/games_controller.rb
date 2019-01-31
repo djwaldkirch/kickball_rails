@@ -12,6 +12,11 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @team = @game.team
+    
+    respond_to do |format|
+      format.html
+      format.csv { send_data @game.export_defense(@team), filename: "#{@game.opponent} #{@game.date}.csv" }
+    end
   end
 
   # GET /games/new
@@ -73,9 +78,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @team = @game.team
     @game.generate_lineup(@team)
-    
     render :show
-    @game.save
   end
   
 

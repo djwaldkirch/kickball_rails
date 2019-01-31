@@ -2,6 +2,63 @@ class Game < ApplicationRecord
     has_many :innings, inverse_of: :game, dependent: :destroy
     belongs_to :user
     belongs_to :team
+    
+    def export_defense(team)
+      header = [" "]
+      pitcher_row = ["P:"]
+      catcher_row = ["C:"]
+      first_row = ["1:"]
+      third_row = ["3:"]
+      lr_row = ["LR:"]
+      rr_row = ["RR:"]
+      l_row = ["L:"]
+      lc_row = ["LC:"]
+      rc_row = ["RC:"]
+      r_row = ["R:"]
+      rows = [header,pitcher_row,catcher_row,first_row,third_row,lr_row,rr_row,l_row,lc_row,rc_row,r_row]
+      index = 0
+      
+      self.innings.each do |inning|
+        index += 1
+        header << index
+        pitcher_row << inning.p
+        catcher_row << inning.c
+        first_row << inning.first
+        third_row << inning.third
+        lr_row << inning.lr
+        rr_row << inning.rr
+        l_row << inning.l
+        lc_row << inning.lc
+        rc_row << inning.rc
+        r_row << inning.r
+      end
+      
+      rows << [" "]
+      
+      bench_index = 0
+      bench_size = get_bench_size(team)
+      
+      bench_size.times do
+          bench_row = [" "]
+          self.innings.each do |inning|
+             bench_split = inning.bench.gsub(/"+/, '').split(", ")
+             bench_row << bench_split[bench_index]
+          end
+          bench_index += 1
+          rows << bench_row
+      end
+      
+      CSV.generate do |csv|
+        rows.each do |row|
+          csv << row
+        end
+      end
+    end
+    
+    def get_bench_size(team)
+        roster = get_working_roster(team)
+        return roster.length - 10
+    end
 
     
     def generate_lineup(t)
@@ -23,22 +80,7 @@ class Game < ApplicationRecord
     def get_working_roster(t)
         Player.all.select { |p| (p.team_id == team.id) && (p.active == true) }
     end
-    
-    def clear_all
-      self.innings.each do |inning|
-        inning.p = nil
-        inning.c = nil
-        inning.first = nil
-        inning.third = nil
-        inning.lr = nil
-        inning.rr = nil
-        inning.l = nil
-        inning.lc = nil
-        inning.rc = nil
-        inning.r = nil
-        inning.bench = nil
-      end
-    end
+
     
     def create_bench_order(players)
       kicking_order = []
@@ -97,7 +139,8 @@ class Game < ApplicationRecord
          bench.each do |x|
            bench_display += x + ", "
          end
-         inning.bench = bench_display
+         bench_display = bench_display[0...-2]
+         inning.update_attribute(:bench, bench_display)
          
          playing = players[0...-(bench_no)]
          playing = playing.shuffle
@@ -109,36 +152,35 @@ class Game < ApplicationRecord
            
            until index > 9 do 
              if free?(inning.p) && player_prefs[index] == 'p'
-              inning.p_will_change!
-              inning.p = plr.name
+              inning.update_attribute(:p, plr.name)
+              #inning.p = plr.name
               break
              elsif free?(inning.c) && player_prefs[index] == 'c'
-              inning.c_will_change!
-              inning.c = plr.name
+              inning.update_attribute(:c, plr.name)
               break
              elsif free?(inning.first) && player_prefs[index] == 'first'
-              inning.first = plr.name
+              inning.update_attribute(:first, plr.name)
               break
              elsif free?(inning.third) && player_prefs[index] == 'third'
-              inning.third = plr.name
+              inning.update_attribute(:third, plr.name)
               break
              elsif free?(inning.lr) && player_prefs[index] == 'lr'
-              inning.lr = plr.name
+              inning.update_attribute(:lr, plr.name)
               break
              elsif free?(inning.rr) && player_prefs[index] == 'rr'
-              inning.rr = plr.name
+              inning.update_attribute(:rr, plr.name)
               break
              elsif free?(inning.l) && player_prefs[index] == 'l'
-              inning.l = plr.name
+              inning.update_attribute(:l, plr.name)
               break
              elsif free?(inning.lc) && player_prefs[index] == 'lc'
-              inning.lc = plr.name
+              inning.update_attribute(:lc, plr.name)
               break
              elsif free?(inning.rc) && player_prefs[index] == 'rc'
-              inning.rc = plr.name
+              inning.update_attribute(:rc, plr.name)
               break
              elsif free?(inning.r) && player_prefs[index] == 'r'
-              inning.r = plr.name
+              inning.update_attribute(:r, plr.name)
               break
              else
               index += 1

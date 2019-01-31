@@ -4,6 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-  has_many :teams
-  has_many :games
+  has_many :teams, dependent: :destroy
+  has_many :games, dependent: :destroy
 end
