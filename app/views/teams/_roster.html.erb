@@ -2,7 +2,7 @@
 <table class="table table-striped">
     <tr>
         <td>Name</td>
-        <td>Gender</td>
+        <td>M/F</td>
         <td>Good Kicker?</td>
         <td>P1</td>
         <td>P2</td>
@@ -20,8 +20,10 @@
     <% @players.each do |p| %>
     <tr>
         <td><%= p.name %></td>
-        <td><%= p.gender %></td>
-        <td><%= p.good_kicker %></td>
+        <td><%= p.gender[0].upcase %></td>
+        <td style="text-align: center;"><%= check_box_tag('p[good_kicker]', '1', p.good_kicker?, 
+        :onchange => "$.ajax({type:'PUT', url:'#{player_path(p.id)}', data: {'p[good_kicker]': (this.checked ? '1' : '0') }, 
+        context:document.body, dataType: 'json'}); void 0;", :id => "player_good_kicker_checkbox_#{p.id}") %></td>
         <td><%= p.p1 %></td>
         <td><%= p.p2 %></td>
         <td><%= p.p3 %></td>
@@ -32,7 +34,9 @@
         <td><%= p.p8 %></td>
         <td><%= p.p9 %></td>
         <td><%= p.p10 %></td>
-        <td><%= p.active %></td>
+        <td style="text-align: center;"><%= check_box_tag('p[active]', '1', p.active?, 
+        :onchange => "$.ajax({type:'PUT', url:'#{player_path(p.id)}', data: {'p[active]': (this.checked ? '1' : '0') }, 
+        context:document.body, dataType: 'json'}); void 0;", :id => "player_active_checkbox_#{p.id}") %></td>
         <td><%= link_to "Edit", edit_player_path(p) %> | <%= link_to "Remove", player_path(p), method: :delete %></td>
     </tr>
     <% end %>
