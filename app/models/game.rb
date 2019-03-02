@@ -2,6 +2,7 @@ class Game < ApplicationRecord
     has_many :innings, inverse_of: :game, dependent: :destroy
     belongs_to :user
     belongs_to :team
+    accepts_nested_attributes_for :innings
     
     def export_defense(team)
       header = [" "]

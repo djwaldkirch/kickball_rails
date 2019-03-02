@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'teams/:id/add_game', to: 'games#new', as: :new_game
   post 'teams/:id/add_game', to: 'games#create', as: :create_game
   
+  resources :innings, only: [:show, :edit, :update, :update]
   
   post 'games/:id/', to: 'games#generate_lineup', as: :generate_button
   post 'games/:id/', to: 'games#save_lineup', as: :save_button

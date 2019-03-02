@@ -1,0 +1,58 @@
+<%= form_for @inning, url:{:controller=>'innings', :action=>'update'}, html:{method:'put'} do |f| %>
+    
+    <div class="form-group">
+        <%= f.label :p, "Pitcher", class:"control label" %>
+        <%= f.text_field :p, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :c, "Catcher", class:"control label" %>
+        <%= f.text_field :c, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :first, "First", class:"control label" %>
+        <%= f.text_field :first, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :third, "Third", class:"control label" %>
+        <%= f.text_field :third, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :lr, "Left Rover", class:"control label" %>
+        <%= f.text_field :lr, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :rr, "Right Rover", class:"control label" %>
+        <%= f.text_field :rr, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :l, "Left", class:"control label" %>
+        <%= f.text_field :l, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :lc, "Left Center", class:"control label" %>
+        <%= f.text_field :lc, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :rc, "Right Center", class:"control label" %>
+        <%= f.text_field :rc, class:"form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.label :r, "Right", class:"control label" %>
+        <%= f.text_field :r, class:"form-control" %>
+    </div>
+    
+    
+    <div><%= f.submit "Update", class:"btn btn-default" %></div>
+    <div><%= link_to "Back", game_path(@inning.game) %></div>
+    
+<% end %>
+</form>
