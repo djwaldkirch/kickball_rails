@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
+<h1 class="text-center">
+  <%= @team.name.upcase %>
+</h1>
 
 <p>
   <%= render 'games', team: @team %>

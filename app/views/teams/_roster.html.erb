@@ -3,17 +3,16 @@
     <tr>
         <td>Name</td>
         <td>M/F</td>
-        <td>Good Kicker?</td>
-        <td>P1</td>
-        <td>P2</td>
-        <td>P3</td>
-        <td>P4</td>
-        <td>P5</td>
-        <td>P6</td>
-        <td>P7</td>
-        <td>P8</td>
-        <td>P9</td>
-        <td>P10</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
         <td>Active</td>
         <td>Actions</td>
     </tr>
@@ -21,9 +20,6 @@
     <tr>
         <td><%= p.name %></td>
         <td><%= p.gender[0].upcase %></td>
-        <td style="text-align: center;"><%= check_box_tag('p[good_kicker]', '1', p.good_kicker?, 
-        :onchange => "$.ajax({type:'PUT', url:'#{player_path(p.id)}', data: {'p[good_kicker]': (this.checked ? '1' : '0') }, 
-        context:document.body, dataType: 'json'}); void 0;", :id => "player_good_kicker_checkbox_#{p.id}") %></td>
         <td><%= p.p1 %></td>
         <td><%= p.p2 %></td>
         <td><%= p.p3 %></td>

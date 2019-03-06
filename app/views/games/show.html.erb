@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 
-  <p>Opponent: <%= @game.opponent %></p>
-  <p>Date: <%= @game.date %></p>
+  <h1 class="text-center"><%= @game.team.name.upcase %> VS. <%= @game.opponent.upcase %></h1>
+  <h5 class="text-center"><%= @game.date %></h5>
   
   <p>Make sure active players are set before generating lineup!</p>
   <p><%= button_to "Generate Lineup", generate_button_path, class:"btn btn-danger", method: :post %></p>
