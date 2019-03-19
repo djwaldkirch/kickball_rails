@@ -1,21 +1,22 @@
 <h2>ROSTER</h2>
+<%= link_to "Add Player", :new_player %>
+<br></br>
 <table class="table table-striped">
     <tr>
-        <td>Name</td>
-        <td>M/F</td>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-        <td>6</td>
-        <td>7</td>
-        <td>8</td>
-        <td>9</td>
-        <td>10</td>
-        <td>Active</td>
-        <td>Actions</td>
-    </tr>
+        <td><b>Name</b></td>
+        <td><b>M/F</b></td>
+        <td><b>1</b></td>
+        <td><b>2</b></td>
+        <td><b>3</b></td>
+        <td><b>4</b></td>
+        <td><b>5</b></td>
+        <td><b>6</b></td>
+        <td><b>7</b></td>
+        <td><b>8</b></td>
+        <td><b>9</b></td>
+        <td><b>10</b></td>
+        <td><b>Active?</b></td>
+        <td><b>Actions</b></td>
     <% @players.each do |p| %>
     <tr>
         <td><%= p.name %></td>

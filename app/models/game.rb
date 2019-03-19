@@ -4,6 +4,10 @@ class Game < ApplicationRecord
     belongs_to :team
     accepts_nested_attributes_for :innings
     
+    validates :no_of_innings, presence: true
+    validates :date, presence: true
+    validates :opponent, presence: true
+    
     def export_defense(team)
       header = [" "]
       pitcher_row = ["P:"]
