@@ -3,14 +3,14 @@
 
   <h1 class="text-center"><%= @game.team.name.upcase %> VS. <%= @game.opponent.upcase %></h1>
   <h5 class="text-center"><%= @game.date %></h5>
-  
+
   <p>Make sure active players are set before generating lineup!</p>
   <p><%= button_to "Generate Lineup", generate_button_path, class:"btn btn-danger", method: :post %></p>
   <p><%= link_to("Export Lineup to CSV", game_path(format: :csv)) %></p>
-  
+
   <!--#link_to "Generate Lineup", :generate_lineup, :method=> :post</p>-->
-  
-  
+
+
 
 
 <table class="table table-striped">
@@ -21,90 +21,103 @@
       <th><%= index %> <%= link_to "EDIT", edit_inning_path(inning) %></th>
       <% index += 1 %>
     <% end %>
-    
+
   </tr>
-  
+
   <tr>
     <td>Pitcher</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.p %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Catcher</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.c %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>First</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.first %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Third</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.third %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Left Rover</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.lr %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Right Rover</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.rr %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Left</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.l %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Left Center</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.lc %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Right Center</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.rc %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Right</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.r %></td>
     <% end %>
   </tr>
-  
+
   <tr>
     <td>Bench</td>
     <% @game.innings.each do |inning| %>
         <td><%= inning.bench %></td>
     <% end %>
   </tr>
-  
-  
-  
+
+
+
 </table>
-  
+
+<br>
+<h3 class="text-center">KICKING ORDER</h3>
+
+<table class="table table-striped">
+  <% @game.kicking_order.order.split(",").each do |name| %>
+    <tr>
+      <td class="text-center"><%= name %></td>
+    </tr>
+
+  <% end %>
+
+</table>
+
 
 
 <%= link_to 'Edit Game', edit_game_path(@game) %> |

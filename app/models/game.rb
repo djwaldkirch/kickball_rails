@@ -1,13 +1,14 @@
 class Game < ApplicationRecord
     has_many :innings, inverse_of: :game, dependent: :destroy
+    has_one :kicking_order, inverse_of: :game, dependent: :destroy
     belongs_to :user
     belongs_to :team
     accepts_nested_attributes_for :innings
-    
+
     validates :no_of_innings, presence: true
     validates :date, presence: true
     validates :opponent, presence: true
-    
+
     def export_defense(team)
       header = [" "]
       pitcher_row = ["P:"]
@@ -22,7 +23,7 @@ class Game < ApplicationRecord
       r_row = ["R:"]
       rows = [header,pitcher_row,catcher_row,first_row,third_row,lr_row,rr_row,l_row,lc_row,rc_row,r_row]
       index = 0
-      
+
       self.innings.each do |inning|
         index += 1
         header << index
@@ -37,12 +38,12 @@ class Game < ApplicationRecord
         rc_row << inning.rc
         r_row << inning.r
       end
-      
+
       rows << [" "]
-      
+
       bench_index = 0
       bench_size = get_bench_size(team)
-      
+
       bench_size.times do
           bench_row = [" "]
           self.innings.each do |inning|
@@ -52,41 +53,51 @@ class Game < ApplicationRecord
           bench_index += 1
           rows << bench_row
       end
-      
+
       CSV.generate do |csv|
         rows.each do |row|
           csv << row
         end
       end
     end
-    
+
     def get_bench_size(team)
         roster = get_working_roster(team)
         return roster.length - 10
     end
 
-    
+
     def generate_lineup(t)
        self.innings = []
        create_innings
        roster = get_working_roster(t)
        roster = create_bench_order(roster)
+       set_kicking_order(roster)
        set_defense(self, roster)
        self.save
     end
-    
+
     def create_innings
         (self.no_of_innings).times do
           self.innings << Inning.new
         end
     end
-    
+
+    def set_kicking_order(roster)
+      self.kicking_order = KickingOrder.new(order:"")
+      self.kicking_order.save
+      roster.each do |player|
+        self.kicking_order.order += player.name + ","
+      end
+      self.kicking_order.save
+    end
+
     #get working roster of people
     def get_working_roster(t)
         Player.all.select { |p| (p.team_id == team.id) && (p.active == true) }
     end
 
-    
+
     def create_bench_order(players)
       kicking_order = []
       guys = []
@@ -99,7 +110,7 @@ class Game < ApplicationRecord
           guys << player
         end
       end
-    
+
       if guys.length > girls.length
         bigger = guys
         smaller = girls
@@ -110,14 +121,14 @@ class Game < ApplicationRecord
         kicking_order = guys.zip(girls).compact.flatten
         return kicking_order
       end
-    
+
       (smaller.length).times do |x|
         kicking_order << bigger[0]
         bigger.shift
         kicking_order << smaller[0]
         smaller.shift
       end
-    
+
       index = 0
       while bigger.any?
         kicking_order.insert(index, bigger[0])
@@ -126,36 +137,36 @@ class Game < ApplicationRecord
       end
       return kicking_order
     end
-    
+
     def set_defense(game, players)
-    
+
       game.innings.each do |inning|
          bench = []
          bench_no = players.length - 10
-         
+
          bench_no.times do
              player = players[0]
              bench << player.name
              players.shift
              players << player
          end
-         
+
          bench_display = ""
          bench.each do |x|
            bench_display += x + ", "
          end
          bench_display = bench_display[0...-2]
          inning.update_attribute(:bench, bench_display)
-         
+
          playing = players[0...-(bench_no)]
          playing = playing.shuffle
-         
+
          playing.each do |plr|
            player_prefs = [plr.p1, plr.p2, plr.p3, plr.p4, plr.p5, plr.p6, plr.p7, plr.p8, plr.p9, plr.p10]
-           
+
            index = 0
-           
-           until index > 9 do 
+
+           until index > 9 do
              if free?(inning.p) && player_prefs[index] == 'p'
               inning.update_attribute(:p, plr.name)
               #inning.p = plr.name
@@ -194,8 +205,8 @@ class Game < ApplicationRecord
          end
       end
     end
-    
-    
+
+
     def free?(position)
       position == nil
     end

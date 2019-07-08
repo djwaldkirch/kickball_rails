@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @team = @game.team
-    
+
     respond_to do |format|
       format.html
       format.csv { send_data @game.export_defense(@team), filename: "#{@game.opponent} #{@game.date}.csv" }
@@ -37,10 +37,10 @@ class GamesController < ApplicationController
     @game = @team.games.build(game_params)
     @game.user = current_user
 
-    
+
     respond_to do |format|
       if @game.save
-        
+
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
@@ -74,14 +74,14 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def generate_lineup
     @game = Game.find(params[:id])
     @team = @game.team
     @game.generate_lineup(@team)
     render :show
   end
-  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -93,5 +93,5 @@ class GamesController < ApplicationController
     def game_params
       params.require(:game).permit(:no_of_innings, :opponent, :date)
     end
-    
+
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_181243) do
+ActiveRecord::Schema.define(version: 2019_07_08_000207) do
 
   create_table "games", force: :cascade do |t|
     t.integer "no_of_innings"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 2019_01_25_181243) do
     t.datetime "updated_at", null: false
     t.integer "game_id"
     t.index ["game_id"], name: "index_innings_on_game_id"
+  end
+
+  create_table "kicking_orders", force: :cascade do |t|
+    t.integer "game_id"
+    t.text "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_kicking_orders_on_game_id"
   end
 
   create_table "players", force: :cascade do |t|
