@@ -45,13 +45,19 @@ class Game < ApplicationRecord
       bench_size = get_bench_size(team)
 
       bench_size.times do
-          bench_row = [" "]
+          bench_row = ["B:"]
           self.innings.each do |inning|
              bench_split = inning.bench.gsub(/"+/, '').split(", ")
              bench_row << bench_split[bench_index]
           end
           bench_index += 1
           rows << bench_row
+      end
+
+      rows << [""]
+      rows << ["","KICKING"]
+      self.kicking_order.order.split(",").each do |name|
+        rows << ["", name]
       end
 
       CSV.generate do |csv|
