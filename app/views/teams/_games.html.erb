@@ -1,5 +1,6 @@
 <h2>GAMES</h2>
     <% @team.games.each do |g| %>
         <p>>> <%= g.date %> vs. <%= g.opponent %> |
-        <%= link_to "LINEUP", game_path(g) %></p>
+        <%= link_to "LINEUP", game_path(g) %> |
+        <%= link_to 'Remove', g, method: :delete, data: { confirm: 'Are you sure?' } %></p>
     <% end %>
