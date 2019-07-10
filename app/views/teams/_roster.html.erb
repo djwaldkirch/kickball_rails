@@ -31,9 +31,7 @@
         <td><%= p.p8 %></td>
         <td><%= p.p9 %></td>
         <td><%= p.p10 %></td>
-        <td style="text-align: center;"><%= check_box_tag('p[active]', '1', p.active?, 
-        :onchange => "$.ajax({type:'PUT', url:'#{player_path(p.id)}', data: {'p[active]': (this.checked ? '1' : '0') }, 
-        context:document.body, dataType: 'json'}); void 0;", :id => "player_active_checkbox_#{p.id}") %></td>
+        <td><%= p.active %></td>
         <td><%= link_to "Edit", edit_player_path(p) %> | <%= link_to "Remove", player_path(p), method: :delete %></td>
     </tr>
     <% end %>

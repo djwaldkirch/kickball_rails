@@ -1,7 +1,20 @@
-User.create!([
-  {email: "djwaldkirch@gmail.com", encrypted_password: "$2a$11$jVkvtm2zxm8ef0qOm5a8Fu8nF4QOLQe9pAwTFsm//sZKFXgOUY0Bu", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, name: "Dan Waldkirch"},
-  {email: "cameron_elkin@yahoo.com", encrypted_password: "$2a$11$Vs9ryejNNo/KfbzwqWKAXuA7zvSu8w9d4l5.dnhLn3L0eq8OaeUue", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2019-07-07 15:37:36", name: "Cameron Elkin"}
-])
+dan = User.new(
+    name: "Dan Waldkirch",
+    email: "djwaldkirch@gmail.com",
+    password: "kickball",
+    password_confirmation: "kickball",
+)
+dan.save!
+
+cam = User.new(
+    name: "Cameron Elkin",
+    email: "cameron_elkin@yahoo.com",
+    password: "kickball",
+    password_confirmation: "kickball",
+)
+cam.save!
+
+
 Game.create!([
   {no_of_innings: 7, opponent: "Test", date: "2019-07-07", user_id: 2, team_id: 1}
 ])

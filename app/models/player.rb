@@ -11,5 +11,4 @@ class Player < ApplicationRecord
     validates :p8, presence: true
     validates :p9, presence: true
     validates :p10, presence: true
-    validates :active, presence: true
 end
